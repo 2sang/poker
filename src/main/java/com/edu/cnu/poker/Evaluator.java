@@ -136,6 +136,20 @@ public class Evaluator {
         return false;
     }
 
+    public boolean isBackStraightFlush(Map<Suit, Integer> suitCounts, Map<Integer, Integer> rankCounts) {
+        if ( isBackStraight(rankCounts)
+                && isFlush(suitCounts))
+            return true;
+        return false;
+    }
+
+    public boolean isRoyalStraightFlush(Map<Suit, Integer> suitCounts, Map<Integer, Integer> rankCounts){
+        if ( isMountain(rankCounts)
+                && isFlush(suitCounts))
+            return true;
+        return false;
+    }
+
     public Map<Suit, Integer> suitCountFromCards(List<Card> cardList){
         Map<Suit, Integer> suitCounts = new HashMap<Suit, Integer>();
         for (Card card : cardList) {
@@ -166,6 +180,4 @@ public class Evaluator {
         }
         return rankCounts;
     }
-
-
 }
