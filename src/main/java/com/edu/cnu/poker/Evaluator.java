@@ -134,21 +134,20 @@ public class Evaluator {
         return false;
     }
 
-    private boolean isBackStraight(List<Card> cardList) {
-        Map<Integer, Integer> tempMap = new HashMap<Integer, Integer>();
-        int totalRank = 0;
+    public boolean isBackStraight(List<Card> cardList) {
 
         for (Card card : cardList) {
-            if (tempMap.containsKey(card.getRank())) {
-                Integer count = tempMap.get(card.getRank());
+            if (rankCounts.containsKey(card.getRank())) {
+                Integer count = rankCounts.get(card.getRank());
                 count = new Integer(count.intValue() + 1);
-                tempMap.put(card.getRank(), count);
+                rankCounts.put(card.getRank(), count);
             } else {
-                tempMap.put(card.getRank(), new Integer(1));
+                rankCounts.put(card.getRank(), new Integer(1));
             }
         }
 
-        for (Integer key : tempMap.keySet())
+        int totalRank = 0;
+        for (Integer key : rankCounts.keySet())
                 totalRank = totalRank + key;
 
         if (totalRank == 15)

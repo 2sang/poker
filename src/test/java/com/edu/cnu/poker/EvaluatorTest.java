@@ -94,7 +94,7 @@ public class EvaluatorTest {
                 new Card(4, Suit.CLUBS),
                 new Card(5, Suit.SPADES)
         );
-        HandRank result = evaluator.evaluate(cardList);
-        assertThat(result, is(HandRank.BACK_STRAIGHT));
+        boolean result = evaluator.isBackStraight(cardList);
+        assertThat(result, is(true));
     }
 }
