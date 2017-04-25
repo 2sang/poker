@@ -27,10 +27,7 @@ public class Evaluator {
     }
 
     public HandRank evaluate(List<Card> cardList) {
-        List<Map> suitAndRankCounts = new List<Map>
-        {new HashMap<Suit, Integer>(), new HashMap<Integer, Integer>()};
-        Map<Suit, Integer> suitCounts;
-        Map<Integer, Integer> rankCounts;
+      return null;
     }
 
     public boolean isFlush(List<Card> cardList) {
@@ -206,5 +203,11 @@ public class Evaluator {
             return true;
         else
             return false;
+    }
+
+    public boolean isStraightFlush(List<Card> cardList) {
+        if (isStraight(cardList) && isFlush(cardList) && !isBackStraight(cardList) && !isMountain(cardList))
+            return true;
+        return false;
     }
 }
