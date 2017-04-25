@@ -27,28 +27,6 @@ public class Evaluator {
         rankCounts = new HashMap<Integer, Integer>();
     }
 
-    public TotalRank evaluate(List<Card> cardList) {
-
-        Map<Suit, Integer> suitCounts = this.suitCountFromCards(cardList);
-        Map<Integer, Integer> rankCounts = this.rankCountFromCards(cardList);
-
-        if (this.isFlush(suitCounts)) {
-            List<Card> fiveFlushCards = this.fiveFlushCardsFromCardList(cardList);
-            Map<Integer, Integer> flushRankCounts = this.rankCountFromCards()
-            if (this.isRoyalStraightFlush(fiveFlushCards))
-                return null;
-            if (this)
-
-        } else{
-
-        }
-
-
-
-
-        return null;
-    }
-
     public boolean isFlush(Map<Suit, Integer> suitCounts) {
 
         for (Suit key : suitCounts.keySet()) {
@@ -57,9 +35,6 @@ public class Evaluator {
             }
         }
         return false;
-    }
-    private List<Card> fiveFlushCardsFromCardList(List<Card> cardList){
-        // get flushed card
     }
 
     public boolean isOnePair(Map<Integer, Integer> rankCounts) {
@@ -155,8 +130,15 @@ public class Evaluator {
         return false;
     }
 
-    public boolean isRoyalStraightFlush(Map<Suit, Integer> suitCounts, Map<Integer, Integer> rankCounts) {
-        if(isMountain(rankCounts)
+    public boolean isBackStraightFlush(Map<Suit, Integer> suitCounts, Map<Integer, Integer> rankCounts) {
+        if ( isBackStraight(rankCounts)
+                && isFlush(suitCounts))
+            return true;
+        return false;
+    }
+
+    public boolean isRoyalStraightFlush(Map<Suit, Integer> suitCounts, Map<Integer, Integer> rankCounts){
+        if ( isMountain(rankCounts)
                 && isFlush(suitCounts))
             return true;
         return false;
@@ -210,6 +192,4 @@ public class Evaluator {
         else
             return false;
     }
-
-
 }
