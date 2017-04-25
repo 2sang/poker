@@ -8,14 +8,15 @@ import java.util.Map;
  * Created by cse on 2017-04-17.
  */
 public class Evaluator {
-    public String evaluate(List<Card> cardList) {
-        String jokbo = new String();
+    public boolean evaluate(List<Card> cardList) {
+        boolean jokbo;
         //jokbo = isFlush(cardList);
-        jokbo = isOnePair(cardList);
+        //jokbo = isOnePair(cardList);
+        jokbo = isTriple(cardList);
         return jokbo;
     }
 
-    private String isFlush(List<Card> cardList) {
+    private boolean isFlush(List<Card> cardList) {
         Map<Suit, Integer> tempMap = new HashMap<Suit, Integer>();
 
         for (Card card : cardList) {
@@ -30,13 +31,13 @@ public class Evaluator {
 
         for (Suit key : tempMap.keySet()) {
             if (tempMap.get(key) == 5) {
-                return "FLUSH";
+                return true;
             }
         }
-        return "NOTHING";
+        return false;
     }
 
-    private  String isOnePair(List<Card> cardList) {
+    private  boolean isOnePair(List<Card> cardList) {
         Map<Integer, Integer> tempMap = new HashMap<Integer, Integer>();
 
         for (Card card : cardList) {
@@ -51,9 +52,30 @@ public class Evaluator {
 
         for (int key : tempMap.keySet()) {
             if (tempMap.get(key) == 2) {
-                return "OnePair";
+                return true;
             }
         }
-        return "NOTHING";
+        return false;
+    }
+
+    private  boolean isTriple(List<Card> cardList) {
+        Map<Integer, Integer> tempMap = new HashMap<Integer, Integer>();
+
+        for (Card card : cardList) {
+            if (tempMap.containsKey(card.getRank())) {
+                Integer count = tempMap.get(card.getRank());
+                count = new Integer(count.intValue() + 1);
+                tempMap.put(card.getRank(), count);
+            }  else {
+                tempMap.put(card.getRank(), new Integer(1));
+            }
+        }
+
+        for (int key : tempMap.keySet()) {
+            if (tempMap.get(key) == 3) {
+                return true;
+            }
+        }
+        return false;
     }
 }
