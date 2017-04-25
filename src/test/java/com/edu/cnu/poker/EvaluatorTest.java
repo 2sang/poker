@@ -150,4 +150,19 @@ public class EvaluatorTest {
         boolean result = evaluator.isStraightFlush(suitCounts, rankCounts);
         assertThat(result, is(true));
     }
+
+    @Test
+    public void 같은_숫자_3개와_같은_숫자_2개이면_풀하우스다() {
+        Evaluator evaluator = new Evaluator();
+        List<Card> cardList = Arrays.asList(
+                new Card(2, Suit.SPADES),
+                new Card(2, Suit.DIAMONDS),
+                new Card(5, Suit.HEARTS),
+                new Card(5, Suit.CLUBS),
+                new Card(5, Suit.SPADES)
+        );
+        Map<Integer, Integer> rankCounts = evaluator.rankCountFromCards(cardList);
+        boolean result = evaluator.isFullHouse(rankCounts);
+        assertThat(result, is(true));
+    }
 }

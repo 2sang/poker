@@ -168,4 +168,22 @@ public class Evaluator {
     }
 
 
+    public boolean isFullHouse(Map<Integer, Integer> rankCounts) {
+
+        int pairCounts = 0;
+        for (int key : rankCounts.keySet()) {
+            if (rankCounts.get(key) == 3 ) {
+                pairCounts = pairCounts + 2;
+            }
+            if (rankCounts.get(key) == 2) {
+                pairCounts++;
+            }
+        }
+        if (pairCounts >= 3)
+            return true;
+        else
+            return false;
+    }
+
+
 }
