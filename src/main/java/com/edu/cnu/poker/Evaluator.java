@@ -91,6 +91,46 @@ public class Evaluator {
         return false;
     }
 
+    public boolean isFullHouse(List<Card> cardList) {
+
+        for (Card card : cardList) {
+            if (rankCounts.containsKey(card.getRank())) {
+                Integer count = rankCounts.get(card.getRank());
+                count = new Integer(count.intValue() + 1);
+                rankCounts.put(card.getRank(), count);
+            }  else {
+                rankCounts.put(card.getRank(), new Integer(1));
+            }
+        }
+        int pairCounts = 0;
+        for (int key : rankCounts.keySet()) {
+            if (rankCounts.get(key) == 3 ) {
+                pairCounts = pairCounts + 2;
+            }
+            if (rankCounts.get(key) == 2) {
+                pairCounts++;
+            }
+        }
+        if (pairCounts >= 3)
+            return true;
+        else
+            return false;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public boolean isFourCard(List<Card> cardList) {
 
         for (Card card : cardList) {

@@ -97,4 +97,19 @@ public class EvaluatorTest {
         boolean result = evaluator.isBackStraight(cardList);
         assertThat(result, is(true));
     }
+
+    @Test
+    public void 같은_숫자_3개와_같은_숫자_2개이면_풀하우스다() {
+        Evaluator evaluator = new Evaluator();
+        List<Card> cardList = Arrays.asList(
+                new Card(2, Suit.SPADES),
+                new Card(2, Suit.DIAMONDS),
+                new Card(5, Suit.HEARTS),
+                new Card(5, Suit.CLUBS),
+                new Card(5, Suit.SPADES)
+        );
+        boolean result = evaluator.isFullHouse(cardList);
+        assertThat(result, is(true));
+    }
+
 }
