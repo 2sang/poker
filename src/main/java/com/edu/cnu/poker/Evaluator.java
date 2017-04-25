@@ -143,15 +143,15 @@ public class Evaluator {
         return false;
     }
 
-    public boolean isBackStraightFlush(Map<Suit, Integer> suitCounts, Map<Integer, Integer> rankCounts) {
-        if ( isBackStraight(rankCounts)
-                && isFlush(suitCounts))
+
+    public boolean isRoyalStraightFlush(Map<Suit, Integer> suitCounts, Map<Integer, Integer> rankCounts) {
+        if(isMountain(rankCounts) && isFlush(suitCounts))
             return true;
         return false;
     }
 
-    public boolean isRoyalStraightFlush(Map<Suit, Integer> suitCounts, Map<Integer, Integer> rankCounts){
-        if ( isMountain(rankCounts)
+    public boolean isBackStraightFlush(Map<Suit, Integer> suitCounts, Map<Integer, Integer> rankCounts) {
+        if ( isBackStraight(rankCounts)
                 && isFlush(suitCounts))
             return true;
         return false;
