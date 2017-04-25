@@ -27,6 +27,24 @@ public class Evaluator {
         rankCounts = new HashMap<Integer, Integer>();
     }
 
+
+    public TotalRank evaluate(List<Card> cardList) {
+
+        Map<Suit, Integer> suitCounts = this.suitCountFromCards(cardList);
+        Map<Integer, Integer> rankCounts = this.rankCountFromCards(cardList);
+
+        HandRank handRank = this.evaluateHandRank(suitCounts, rankCounts);
+
+        
+
+
+
+        return null;
+    }
+    private HandRank evaluateHandRank(Map<Suit, Integer> suitCounts, Map<Integer, Integer> rankCounts){
+        if(this.isRoyalSt)
+    }
+
     public boolean isFlush(Map<Suit, Integer> suitCounts) {
 
         for (Suit key : suitCounts.keySet()) {
