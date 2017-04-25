@@ -152,7 +152,7 @@ public class Evaluator {
 
         int straightCount = 0;
         for (Integer key : rankCounts.keySet()) {
-            if ((rankCounts.containsKey(key + 1) || rankCounts.containsKey(key - 1)) && (key != 1)){
+            if ((rankCounts.containsKey(key + 1) || rankCounts.containsKey(key - 1))){
                 straightCount++;
             }
         }
@@ -206,7 +206,7 @@ public class Evaluator {
     }
 
     public boolean isStraightFlush(List<Card> cardList) {
-        if (isStraight(cardList) && isFlush(cardList))
+        if (isStraight(cardList) && isFlush(cardList) && !isBackStraight(cardList) && !isMountain(cardList))
             return true;
         return false;
     }
