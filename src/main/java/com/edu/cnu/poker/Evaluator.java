@@ -32,21 +32,11 @@ public class Evaluator {
         Map<Suit, Integer> suitCounts = this.suitCountFromCards(cardList);
         Map<Integer, Integer> rankCounts = this.rankCountFromCards(cardList);
 
-        if (this.isFlush(suitCounts)) {
-            List<Card> fiveFlushCards = this.fiveFlushCardsFromCardList(cardList);
-            Map<Integer, Integer> flushRankCounts = this.rankCountFromCards()
-            if (this.isRoyalStraightFlush(fiveFlushCards))
-                return null;
-            if (this)
-
-        } else{
-
-        }
-
-
-
 
         return null;
+    }
+    private HandRank evaluateHandRank(Map<Suit, Integer> suitCounts, Map<Integer, Integer> rankCounts){
+        if(this.isRoyalSt)
     }
 
     public boolean isFlush(Map<Suit, Integer> suitCounts) {
