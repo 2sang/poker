@@ -12,132 +12,126 @@ public class Evaluator {
 
 
     private List<Card> cardList;
-    private List<HandRank> rankFlags = new ArrayList<HandRank>();
+    private Map<Suit, Integer> suitCounts;
+    private Map<Integer, Integer> rankCounts;
 
     public Evaluator() {
-
+        this.cardList = null;
+        suitCounts = new HashMap<Suit, Integer>();
+        rankCounts = new HashMap<Integer, Integer>();
     }
     public Evaluator(List<Card> cardList){
         this.cardList = cardList;
+        suitCounts = new HashMap<Suit, Integer>();
+        rankCounts = new HashMap<Integer, Integer>();
     }
 
     public HandRank evaluate(List<Card> cardList) {
-        if (isFlush(cardList)) return HandRank.FLUSH;
-        else if (isFourcard(cardList)) return HandRank.FOUR_CARD;
-        else if (isTriple(cardList)) return HandRank.TRIPLE;
-        else if (isOnePair(cardList)) return HandRank.ONE_PAIR;
-        else if (isStraight(cardList)) return HandRank.STRAIGHT;
-        else if (isBackStraight(cardList)) return HandRank.BACK_STRAIGHT;
-        else return null;
+        return null;
     }
 
-    private boolean isFlush(List<Card> cardList) {
-        Map<Suit, Integer> tempMap = new HashMap<Suit, Integer>();
+    public boolean isFlush(List<Card> cardList) {
 
         for (Card card : cardList) {
-            if (tempMap.containsKey(card.getSuit())) {
-                Integer count = tempMap.get(card.getSuit());
+            if (suitCounts.containsKey(card.getSuit())) {
+                Integer count = suitCounts.get(card.getSuit());
                 count = new Integer(count.intValue() + 1);
-                tempMap.put(card.getSuit(), count);
+                suitCounts.put(card.getSuit(), count);
             } else {
-                tempMap.put(card.getSuit(), new Integer(1));
+                suitCounts.put(card.getSuit(), new Integer(1));
             }
         }
 
-        for (Suit key : tempMap.keySet()) {
-            if (tempMap.get(key) == 5) {
+        for (Suit key : suitCounts.keySet()) {
+            if (suitCounts.get(key) == 5) {
                 return true;
             }
         }
         return false;
     }
 
-    private  boolean isOnePair(List<Card> cardList) {
-        Map<Integer, Integer> tempMap = new HashMap<Integer, Integer>();
+    public boolean isOnePair(List<Card> cardList) {
 
         for (Card card : cardList) {
-            if (tempMap.containsKey(card.getRank())) {
-                Integer count = tempMap.get(card.getRank());
-                count = new Integer(count.intValue() + 1);
-                tempMap.put(card.getRank(), count);
+            if (rankCounts.containsKey(card.getRank())) {
+                Integer concatCount = rankCounts.get(card.getRank());
+                concatCount = new Integer(concatCount.intValue() + 1);
+                rankCounts.put(card.getRank(), concatCount);
             }  else {
-                tempMap.put(card.getRank(), new Integer(1));
+                rankCounts.put(card.getRank(), new Integer(1));
             }
         }
 
-        for (int key : tempMap.keySet()) {
-            if (tempMap.get(key) == 2) {
+        for (int key : rankCounts.keySet()) {
+            if (rankCounts.get(key) == 2) {
                 return true;
             }
         }
+        System.out.println(this.rankCounts);
         return false;
     }
 
-    private  boolean isTriple(List<Card> cardList) {
-        Map<Integer, Integer> tempMap = new HashMap<Integer, Integer>();
+    public boolean isTriple(List<Card> cardList) {
 
         for (Card card : cardList) {
-            if (tempMap.containsKey(card.getRank())) {
-                Integer count = tempMap.get(card.getRank());
+            if (rankCounts.containsKey(card.getRank())) {
+                Integer count = rankCounts.get(card.getRank());
                 count = new Integer(count.intValue() + 1);
-                tempMap.put(card.getRank(), count);
+                rankCounts.put(card.getRank(), count);
             }  else {
-                tempMap.put(card.getRank(), new Integer(1));
+                rankCounts.put(card.getRank(), new Integer(1));
             }
         }
 
-        for (int key : tempMap.keySet()) {
-            if (tempMap.get(key) == 3) {
+        for (int key : rankCounts.keySet()) {
+            if (rankCounts.get(key) == 3) {
                 return true;
             }
         }
         return false;
     }
 
-    private boolean isFourcard(List<Card> cardList) {
-        Map<Integer, Integer> tempMap = new HashMap<Integer, Integer>();
+    public boolean isFourCard(List<Card> cardList) {
 
         for (Card card : cardList) {
-            if (tempMap.containsKey(card.getRank())) {
-                Integer count = tempMap.get(card.getRank());
+            if (rankCounts.containsKey(card.getRank())) {
+                Integer count = rankCounts.get(card.getRank());
                 count = new Integer(count.intValue() + 1);
-                tempMap.put(card.getRank(), count);
+                rankCounts.put(card.getRank(), count);
             } else {
-                tempMap.put(card.getRank(), new Integer(1));
+                rankCounts.put(card.getRank(), new Integer(1));
             }
         }
 
-        for (Integer key : tempMap.keySet()) {
-            if (tempMap.get(key) == 4) {
+        for (Integer key : rankCounts.keySet()) {
+            if (rankCounts.get(key) == 4) {
                 return true;
             }
         }
         return false;
     }
 
-    private boolean isStraight(List<Card> cardList) {
-        Map<Integer, Integer> tempMap = new HashMap<Integer, Integer>();
+    public boolean isStraight(List<Card> cardList) {
+
+        for (Card card : cardList) {
+            if (rankCounts.containsKey(card.getRank())) {
+                Integer count = rankCounts.get(card.getRank());
+                count = new Integer(count.intValue() + 1);
+                rankCounts.put(card.getRank(), count);
+            } else {
+                rankCounts.put(card.getRank(), new Integer(1));
+            }
+        }
+
         int straightCount = 0;
-
-        for (Card card : cardList) {
-            if (tempMap.containsKey(card.getRank())) {
-                Integer count = tempMap.get(card.getRank());
-                count = new Integer(count.intValue() + 1);
-                tempMap.put(card.getRank(), count);
-            } else {
-                tempMap.put(card.getRank(), new Integer(1));
-            }
-        }
-
-        for (Integer key : tempMap.keySet()) {
-            if ((tempMap.containsKey(key + 1) || tempMap.containsKey(key - 1)) && (key != 1)){
+        for (Integer key : rankCounts.keySet()) {
+            if ((rankCounts.containsKey(key + 1) || rankCounts.containsKey(key - 1)) && (key != 1)){
                 straightCount++;
             }
         }
         if (straightCount == 5)
             return true;
-        else
-            return false;
+        return false;
     }
 
     private boolean isBackStraight(List<Card> cardList) {
