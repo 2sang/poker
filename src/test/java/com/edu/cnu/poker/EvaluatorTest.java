@@ -69,4 +69,18 @@ public class EvaluatorTest {
         HandRank result = evaluator.evaluate(cardList);
         assertThat(result, is(HandRank.FOUR_CARD));
     }
+
+    @Test
+    public void 무늬가_같지않고_5장의_숫자가_연속이면_스트레이트다() {
+        Evaluator evaluator = new Evaluator();
+        List<Card> cardList = Arrays.asList(
+                new Card(13, Suit.SPADES),
+                new Card(12, Suit.DIAMONDS),
+                new Card(11, Suit.HEARTS),
+                new Card(10, Suit.CLUBS),
+                new Card(9, Suit.SPADES)
+        );
+        HandRank result = evaluator.evaluate(cardList);
+        assertThat(result, is(HandRank.STRAIGHT));
+    }
 }
