@@ -165,4 +165,7 @@ public class EvaluatorTest {
         boolean result = evaluator.isFullHouse(rankCounts);
         assertThat(result, is(true));
     }
+
+
+
 }

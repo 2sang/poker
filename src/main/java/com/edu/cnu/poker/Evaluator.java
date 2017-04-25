@@ -81,6 +81,7 @@ public class Evaluator {
         return false;
     }
 
+
     public boolean isFourCard(Map<Integer, Integer> rankCounts) {
 
         for (Integer key : rankCounts.keySet()) {
