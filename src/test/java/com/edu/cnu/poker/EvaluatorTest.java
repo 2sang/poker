@@ -24,8 +24,8 @@ public class EvaluatorTest {
                 new Card(13,Suit.CLUBS),
                 new Card(2,Suit.CLUBS)
         );
-        HandRank result = evaluator.evaluate(cardList);
-        assertThat(result, is(HandRank.FLUSH));
+        boolean result = evaluator.isFlush(cardList);
+        assertThat(result, is(true));
     }
 
     @Test
@@ -38,8 +38,8 @@ public class EvaluatorTest {
                 new Card(4, Suit.CLUBS),
                 new Card(5, Suit.SPADES)
         );
-        HandRank result = evaluator.evaluate(cardList);
-        assertThat(result, is(HandRank.ONE_PAIR));
+        boolean result = evaluator.isOnePair(cardList);
+        assertThat(result, is(true));
     }
 
     @Test
@@ -52,8 +52,8 @@ public class EvaluatorTest {
                 new Card(5, Suit.SPADES),
                 new Card(11, Suit.SPADES)
         );
-        HandRank result = evaluator.evaluate(cardList);
-        assertThat(result, is(HandRank.TRIPLE));
+        boolean result = evaluator.isTriple(cardList);
+        assertThat(result, is(true));
     }
 
     @Test
@@ -66,8 +66,8 @@ public class EvaluatorTest {
                 new Card(4, Suit.CLUBS),
                 new Card(5, Suit.SPADES)
         );
-        HandRank result = evaluator.evaluate(cardList);
-        assertThat(result, is(HandRank.FOUR_CARD));
+        boolean result = evaluator.isFourCard(cardList);
+        assertThat(result, is(true));
     }
 
     @Test
@@ -80,7 +80,7 @@ public class EvaluatorTest {
                 new Card(10, Suit.CLUBS),
                 new Card(9, Suit.SPADES)
         );
-        HandRank result = evaluator.evaluate(cardList);
-        assertThat(result, is(HandRank.STRAIGHT));
+        boolean result = evaluator.isStraight(cardList);
+        assertThat(result, is(true));
     }
 }
