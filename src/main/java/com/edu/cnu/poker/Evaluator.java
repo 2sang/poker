@@ -1,5 +1,6 @@
 package com.edu.cnu.poker;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,14 +9,20 @@ import java.util.Map;
  * Created by cse on 2017-04-17.
  */
 public class Evaluator {
-    public String evaluate(List<Card> cardList) {
-        String jokbo = new String();
-        //jokbo = isFlush(cardList);
-        jokbo = isOnePair(cardList);
-        return jokbo;
+
+    private List<Card> cardList;
+    private List<HandRank> rankFlags = new ArrayList<HandRank>();
+
+
+    public Evaluator(List<Card> cardList){
+        this.cardList = cardList;
     }
 
-    private String isFlush(List<Card> cardList) {
+    public HandRank evaluate(List<Card> cardList) {
+        return null;
+    }
+
+    private boolean isFlush(List<Card> cardList) {
         Map<Suit, Integer> tempMap = new HashMap<Suit, Integer>();
 
         for (Card card : cardList) {
@@ -30,10 +37,10 @@ public class Evaluator {
 
         for (Suit key : tempMap.keySet()) {
             if (tempMap.get(key) == 5) {
-                return "FLUSH";
+                return true;
             }
         }
-        return "NOTHING";
+        return false;
     }
 
     private  String isOnePair(List<Card> cardList) {
