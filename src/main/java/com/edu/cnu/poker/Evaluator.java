@@ -9,6 +9,13 @@ import java.util.Map;
  */
 public class Evaluator {
     public String evaluate(List<Card> cardList) {
+        String jokbo = new String();
+        //jokbo = isFlush(cardList);
+        jokbo = isOnePair(cardList);
+        return jokbo;
+    }
+
+    private String isFlush(List<Card> cardList) {
         Map<Suit, Integer> tempMap = new HashMap<Suit, Integer>();
 
         for (Card card : cardList) {
@@ -24,6 +31,27 @@ public class Evaluator {
         for (Suit key : tempMap.keySet()) {
             if (tempMap.get(key) == 5) {
                 return "FLUSH";
+            }
+        }
+        return "NOTHING";
+    }
+
+    private  String isOnePair(List<Card> cardList) {
+        Map<Integer, Integer> tempMap = new HashMap<Integer, Integer>();
+
+        for (Card card : cardList) {
+            if (tempMap.containsKey(card.getRank())) {
+                Integer count = tempMap.get(card.getRank());
+                count = new Integer(count.intValue() + 1);
+                tempMap.put(card.getRank(), count);
+            }  else {
+                tempMap.put(card.getRank(), new Integer(1));
+            }
+        }
+
+        for (int key : tempMap.keySet()) {
+            if (tempMap.get(key) == 2) {
+                return "OnePair";
             }
         }
         return "NOTHING";
