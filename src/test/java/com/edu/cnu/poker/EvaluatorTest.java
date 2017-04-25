@@ -145,7 +145,9 @@ public class EvaluatorTest {
                 new Card(5, Suit.CLUBS),
                 new Card(6, Suit.CLUBS)
         );
-        boolean result = evaluator.isStraightFlush(cardList);
+        Map<Suit, Integer> suitCounts = evaluator.suitCountFromCards(cardList);
+        Map<Integer, Integer> rankCounts = evaluator.rankCountFromCards(cardList);
+        boolean result = evaluator.isStraightFlush(suitCounts, rankCounts);
         assertThat(result, is(true));
     }
 }
