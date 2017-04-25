@@ -97,4 +97,19 @@ public class EvaluatorTest {
         boolean result = evaluator.isBackStraight(cardList);
         assertThat(result, is(true));
     }
+
+    @Test
+    public void 무늬가_같지않고_10_J_Q_K_A_숫자가_연속이면_마운틴이다() {
+        Evaluator evaluator = new Evaluator();
+        List<Card> cardList = Arrays.asList(
+                new Card(10, Suit.SPADES),
+                new Card(11, Suit.DIAMONDS),
+                new Card(12, Suit.HEARTS),
+                new Card(13, Suit.CLUBS),
+                new Card(1, Suit.SPADES)
+        );
+        boolean result = evaluator.isMountain(cardList);
+        assertThat(result, is(true));
+    }
+
 }
