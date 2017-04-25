@@ -5,6 +5,7 @@ import org.junit.Test;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.hamcrest.CoreMatchers.both;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -23,8 +24,8 @@ public class EvaluatorTest {
                 new Card(13,Suit.CLUBS),
                 new Card(2,Suit.CLUBS)
         );
-        String result = evaluator.evaluate(cardList);
-        assertThat(result, is("FLUSH"));
+        boolean result = evaluator.evaluate(cardList);
+        assertThat(result, is(true));
     }
 
     @Test
@@ -37,7 +38,21 @@ public class EvaluatorTest {
                 new Card(4, Suit.CLUBS),
                 new Card(5, Suit.SPADES)
         );
-        String result = evaluator.evaluate(cardList);
-        assertThat(result, is("OnePair"));
+        boolean result = evaluator.evaluate(cardList);
+        assertThat(result, is(true));
+    }
+
+    @Test
+    public void 같은_숫자의_카드가_세장이면_트리플이다() {
+        Evaluator evaluator = new Evaluator();
+        List<Card> cardList = Arrays.asList(
+                new Card(2, Suit.SPADES),
+                new Card(5, Suit.HEARTS),
+                new Card(5, Suit.DIAMONDS),
+                new Card(5, Suit.SPADES),
+                new Card(11, Suit.SPADES)
+        );
+        boolean result = evaluator.evaluate(cardList);
+        assertThat(result, is(true));
     }
 }
