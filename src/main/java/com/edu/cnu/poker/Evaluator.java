@@ -25,14 +25,21 @@ public class Evaluator {
         this.cardList = cardList;
         suitCounts = new HashMap<Suit, Integer>();
         rankCounts = new HashMap<Integer, Integer>();
+
+        suitCounts = suitCountFromCards(this.cardList);
+        rankCounts = rankCountFromCards(this.cardList);
+        cal();
     }
 
-    public HandRank evaluate(List<Card> cardList) {
+    public TotalRank cal(){
+        int temp = 0;
+        for (int key : this.rankCounts.keySet()) {
+            if (key > temp) temp = key;
+        }
 
-        Map<Suit, Integer> suitCounts = this.suitCountFromCards(cardList);
-        Map<Integer, Integer> rankCounts = this.rankCountFromCards(cardList);
-        return null;
+        TotalRank rank = new TotalRank(temp, suitCounts.ge);
     }
+
 
     public boolean isFlush(Map<Suit, Integer> suitCounts) {
 

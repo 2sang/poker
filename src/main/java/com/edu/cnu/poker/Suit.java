@@ -14,4 +14,8 @@ public enum Suit {
     private Suit(int rank){
         this.rankOfSuit = rank;
     };
+
+    public int getSuit() {
+        return rankOfSuit;
+    }
 }
