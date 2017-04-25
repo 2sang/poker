@@ -28,21 +28,53 @@ public class Evaluator {
     }
 
 
-    public TotalRank evaluate(List<Card> cardList) {
+    public HandRank evaluate(List<Card> cardList) {
 
         Map<Suit, Integer> suitCounts = this.suitCountFromCards(cardList);
         Map<Integer, Integer> rankCounts = this.rankCountFromCards(cardList);
 
         HandRank handRank = this.evaluateHandRank(suitCounts, rankCounts);
-
-        
-
-
-
-        return null;
+        return handRank;
     }
     private HandRank evaluateHandRank(Map<Suit, Integer> suitCounts, Map<Integer, Integer> rankCounts){
-        if(this.isRoyalSt)
+
+        if (this.isRoyalStraightFlush(suitCounts, rankCounts))
+            return HandRank.ROYAL_STRAIGHT_FLUSH;
+
+        if (this.isBackStraightFlush(suitCounts, rankCounts))
+            return HandRank.BACK_STRAIGHT_FLUSH;
+
+        if (this.isStraightFlush(suitCounts, rankCounts))
+            return HandRank.STRAIGHT_FLUSH;
+
+        if (this.isFourCard(rankCounts))
+            return HandRank.FULL_HOUSE;
+
+        if (this.isFullHouse(rankCounts))
+            return HandRank.FULL_HOUSE;
+
+        if (this.isFlush(suitCounts))
+            return HandRank.FLUSH;
+
+        if (this.isMountain(rankCounts))
+            return HandRank.MOUNTAIN;
+
+        if (this.isBackStraight(rankCounts))
+            return HandRank.BACK_STRAIGHT;
+
+        if (this.isStraight(rankCounts))
+            return HandRank.STRAIGHT;
+
+        if (this.isTriple(rankCounts))
+            return HandRank.TRIPLE;
+
+        if (this.isTwoPair(rankCounts))
+            return HandRank.TWO_PAIR;
+
+        if (this.isOnePair(rankCounts))
+            return HandRank.ONE_PAIR;
+
+        return HandRank.TOP;
     }
 
     public boolean isFlush(Map<Suit, Integer> suitCounts) {
