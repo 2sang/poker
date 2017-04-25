@@ -30,7 +30,7 @@ public class Evaluator {
     public HandRank evaluate(List<Card> cardList) {
         Map<Suit, Integer> suitCounts = this.suitCountFromCards(cardList);
         Map<Integer, Integer> rankCounts = this.rankCountFromCards(cardList);
-        
+        return null;
     }
 
     public boolean isFlush(Map<Suit, Integer> suitCounts) {
@@ -155,6 +155,6 @@ public class Evaluator {
                 rankCounts.put(card.getRank(), new Integer(1));
             }
         }
-        return rankCounts
+        return rankCounts;
     }
 }
