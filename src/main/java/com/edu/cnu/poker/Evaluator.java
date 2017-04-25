@@ -206,7 +206,7 @@ public class Evaluator {
     }
 
     public boolean isStraightFlush(List<Card> cardList) {
-        if (isStraight(cardList) && isFlush(cardList) && !isBackStraight(cardList) && !isMountain(cardList))
+        if (isStraight(cardList) && isFlush(cardList))
             return true;
         return false;
     }
