@@ -1,15 +1,15 @@
 package com.edu.cnu.poker;
 
 import org.junit.Test;
-
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 /**
  * Created by cse on 2017-04-17.
  */
-public class DeckTest {
 
+
+public class DeckTest {
     @Test
     public void Deck2개의_총카드수는_104(){
         Deck deck = new Deck(2);
@@ -24,12 +24,14 @@ public class DeckTest {
         assertThat(totalCard, is(260));
     }
 
+
     @Test
     public void 싱글덱에서_카드를_한장뽑으면_51장이남는다() {
         Deck deck = new Deck(1);
         deck.drawCard();
         assertThat(deck.getTotalCard(), is(51));
     }
+
 
     @Test(expected = NoMoreCardException.class)
     public void 카드가없으면_에러발생() {
@@ -41,4 +43,5 @@ public class DeckTest {
         }
         deck.drawCard();
     }
+
 }
