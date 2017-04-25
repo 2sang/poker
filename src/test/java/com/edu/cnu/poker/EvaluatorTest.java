@@ -126,4 +126,17 @@ public class EvaluatorTest {
         assertThat(result, is(true));
     }
 
+    @Test
+    public void 무늬가_같고_숫자가_연속이면_스트레이트플러쉬이다() {
+        Evaluator evaluator = new Evaluator();
+        List<Card> cardList = Arrays.asList(
+                new Card(2, Suit.CLUBS),
+                new Card(3, Suit.CLUBS),
+                new Card(4, Suit.CLUBS),
+                new Card(5, Suit.CLUBS),
+                new Card(6, Suit.CLUBS)
+        );
+        boolean result = evaluator.isStraightFlush(cardList);
+        assertThat(result, is(true));
+    }
 }
