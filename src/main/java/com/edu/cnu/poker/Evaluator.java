@@ -27,6 +27,7 @@ public class Evaluator {
         else if (isTriple(cardList)) return HandRank.TRIPLE;
         else if (isOnePair(cardList)) return HandRank.ONE_PAIR;
         else if (isStraight(cardList)) return HandRank.STRAIGHT;
+        else if (isBackStraight(cardList)) return HandRank.BACK_STRAIGHT;
         else return null;
     }
 
@@ -134,6 +135,29 @@ public class Evaluator {
             }
         }
         if (straightCount == 5)
+            return true;
+        else
+            return false;
+    }
+
+    private boolean isBackStraight(List<Card> cardList) {
+        Map<Integer, Integer> tempMap = new HashMap<Integer, Integer>();
+        int totalRank = 0;
+
+        for (Card card : cardList) {
+            if (tempMap.containsKey(card.getRank())) {
+                Integer count = tempMap.get(card.getRank());
+                count = new Integer(count.intValue() + 1);
+                tempMap.put(card.getRank(), count);
+            } else {
+                tempMap.put(card.getRank(), new Integer(1));
+            }
+        }
+
+        for (Integer key : tempMap.keySet())
+                totalRank = totalRank + key;
+
+        if (totalRank == 15)
             return true;
         else
             return false;

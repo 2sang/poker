@@ -83,4 +83,18 @@ public class EvaluatorTest {
         HandRank result = evaluator.evaluate(cardList);
         assertThat(result, is(HandRank.STRAIGHT));
     }
+
+    @Test
+    public void 무늬가_같지않고_A_2_3_4_5_숫자가_연속이면_백스트레이트다() {
+        Evaluator evaluator = new Evaluator();
+        List<Card> cardList = Arrays.asList(
+                new Card(1, Suit.SPADES),
+                new Card(2, Suit.DIAMONDS),
+                new Card(3, Suit.HEARTS),
+                new Card(4, Suit.CLUBS),
+                new Card(5, Suit.SPADES)
+        );
+        HandRank result = evaluator.evaluate(cardList);
+        assertThat(result, is(HandRank.BACK_STRAIGHT));
+    }
 }
