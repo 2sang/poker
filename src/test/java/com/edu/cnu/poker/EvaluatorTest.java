@@ -136,6 +136,22 @@ public class EvaluatorTest {
     }
 
     @Test
+    public void 무늬가_같고_10_11_12_13_A_숫자가_연속이면_로열스트레이트_플러쉬다() {
+        Evaluator evaluator = new Evaluator();
+        List<Card> cardList = Arrays.asList(
+                new Card(10, Suit.CLUBS),
+                new Card(11, Suit.CLUBS),
+                new Card(12, Suit.CLUBS),
+                new Card(13, Suit.CLUBS),
+                new Card(1, Suit.CLUBS)
+        );
+        Map<Suit, Integer> suitCounts = evaluator.suitCountFromCards(cardList);
+        Map<Integer, Integer> rankCounts = evaluator.rankCountFromCards(cardList);
+        boolean result = evaluator.isRoyalStraightFlush(suitCounts, rankCounts);
+        assertThat(result, is(true));
+    }
+
+    @Test
     public void 무늬가_같고_숫자가_연속이면_스트레이트플러쉬이다() {
         Evaluator evaluator = new Evaluator();
         List<Card> cardList = Arrays.asList(
