@@ -32,6 +32,11 @@ public class Evaluator {
         Map<Suit, Integer> suitCounts = this.suitCountFromCards(cardList);
         Map<Integer, Integer> rankCounts = this.rankCountFromCards(cardList);
 
+        HandRank handRank = this.evaluateHandRank(suitCounts, rankCounts);
+
+        
+
+
 
         return null;
     }
