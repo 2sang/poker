@@ -43,6 +43,20 @@ public class EvaluatorTest {
     }
 
     @Test
+    public void 같은_숫자의_카드가_두쌍_존재하면_투페어다() {
+        Evaluator evaluator = new Evaluator();
+        List<Card> cardList = Arrays.asList(
+                new Card(2, Suit.SPADES),
+                new Card(2, Suit.DIAMONDS),
+                new Card(3, Suit.HEARTS),
+                new Card(3, Suit.CLUBS),
+                new Card(5, Suit.SPADES)
+        );
+        boolean result = evaluator.isTwoPair(cardList);
+        assertThat(result, is(true));
+    }
+
+    @Test
     public void 같은_숫자의_카드가_세장이면_트리플이다() {
         Evaluator evaluator = new Evaluator();
         List<Card> cardList = Arrays.asList(

@@ -71,6 +71,33 @@ public class Evaluator {
         return false;
     }
 
+    public boolean isTwoPair(List<Card> cardList){
+        Map<Integer, Integer> tempMap = new HashMap<Integer, Integer>();
+        int cnt = 0;
+
+        for (Card card : cardList) {
+            if (tempMap.containsKey(card.getRank())) {
+                Integer count = tempMap.get(card.getRank());
+                count = new Integer(count.intValue() + 1);
+                tempMap.put(card.getRank(), count);
+            }  else {
+                tempMap.put(card.getRank(), new Integer(1));
+            }
+        }
+
+        for (int key : tempMap.keySet()) {
+            if (tempMap.get(key) == 2) {
+                cnt++;
+            }
+        }
+
+        if(cnt == 2){
+            return true;
+        }
+
+        return false;
+    }
+
     public boolean isTriple(List<Card> cardList) {
 
         for (Card card : cardList) {
