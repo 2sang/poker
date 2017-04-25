@@ -50,7 +50,7 @@ public class Evaluator {
             return HandRank.STRAIGHT_FLUSH;
 
         if (this.isFourCard(rankCounts))
-            return HandRank.FULL_HOUSE;
+            return HandRank.FOUR_CARD;
 
         if (this.isFullHouse(rankCounts))
             return HandRank.FULL_HOUSE;

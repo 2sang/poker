@@ -31,6 +31,21 @@ public class EvaluatorTest {
     }
 
     @Test
+    public void 모든_족보에_속하지않으면_탑이다(){
+        Evaluator evaluator = new Evaluator();
+        List<Card> cardList = Arrays.asList(
+                new Card(13, Suit.SPADES),
+                new Card(12, Suit.DIAMONDS),
+                new Card(3, Suit.HEARTS),
+                new Card(7, Suit.CLUBS),
+                new Card(5, Suit.SPADES)
+        );
+        Map<Integer, Integer> rankCounts = evaluator.rankCountFromCards(cardList);
+        HandRank result = evaluator.evaluate(cardList);
+        assertThat(result, is(HandRank.TOP));
+    }
+
+    @Test
     public void 같은_숫자의_카드가_두장이면_원페어다() {
         Evaluator evaluator = new Evaluator();
         List<Card> cardList = Arrays.asList(
