@@ -27,7 +27,10 @@ public class Evaluator {
     }
 
     public HandRank evaluate(List<Card> cardList) {
-        return null;
+        List<Map> suitAndRankCounts = new List<Map>
+        {new HashMap<Suit, Integer>(), new HashMap<Integer, Integer>()};
+        Map<Suit, Integer> suitCounts;
+        Map<Integer, Integer> rankCounts;
     }
 
     public boolean isFlush(List<Card> cardList) {
