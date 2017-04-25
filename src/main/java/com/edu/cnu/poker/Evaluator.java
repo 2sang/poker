@@ -182,4 +182,26 @@ public class Evaluator {
         else
             return false;
     }
+
+    public boolean isMountain(List<Card> cardList) {
+
+        for (Card card : cardList) {
+            if (rankCounts.containsKey(card.getRank())) {
+                Integer count = rankCounts.get(card.getRank());
+                count = new Integer(count.intValue() + 1);
+                rankCounts.put(card.getRank(), count);
+            } else {
+                rankCounts.put(card.getRank(), new Integer(1));
+            }
+        }
+
+        int totalRank = 0;
+        for (Integer key : rankCounts.keySet())
+            totalRank = totalRank + key;
+
+        if (totalRank == 47)
+            return true;
+        else
+            return false;
+    }
 }
