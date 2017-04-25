@@ -24,8 +24,8 @@ public class EvaluatorTest {
                 new Card(13,Suit.CLUBS),
                 new Card(2,Suit.CLUBS)
         );
-        boolean result = evaluator.evaluate(cardList);
-        assertThat(result, is(true));
+        HandRank result = evaluator.evaluate(cardList);
+        assertThat(result, is(HandRank.FLUSH));
     }
 
     @Test
@@ -38,8 +38,8 @@ public class EvaluatorTest {
                 new Card(4, Suit.CLUBS),
                 new Card(5, Suit.SPADES)
         );
-        boolean result = evaluator.evaluate(cardList);
-        assertThat(result, is(true));
+        HandRank result = evaluator.evaluate(cardList);
+        assertThat(result, is(HandRank.ONE_PAIR));
     }
 
     @Test
@@ -52,7 +52,21 @@ public class EvaluatorTest {
                 new Card(5, Suit.SPADES),
                 new Card(11, Suit.SPADES)
         );
-        boolean result = evaluator.evaluate(cardList);
-        assertThat(result, is(true));
+        HandRank result = evaluator.evaluate(cardList);
+        assertThat(result, is(HandRank.TRIPLE));
+    }
+
+    @Test
+    public void 같은_숫자의_카드가_네장이면_포카드다() {
+        Evaluator evaluator = new Evaluator();
+        List<Card> cardList = Arrays.asList(
+                new Card(4, Suit.SPADES),
+                new Card(4, Suit.DIAMONDS),
+                new Card(4, Suit.HEARTS),
+                new Card(4, Suit.CLUBS),
+                new Card(5, Suit.SPADES)
+        );
+        HandRank result = evaluator.evaluate(cardList);
+        assertThat(result, is(HandRank.FOUR_CARD));
     }
 }

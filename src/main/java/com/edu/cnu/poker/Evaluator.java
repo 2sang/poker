@@ -1,5 +1,6 @@
 package com.edu.cnu.poker;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,12 +9,24 @@ import java.util.Map;
  * Created by cse on 2017-04-17.
  */
 public class Evaluator {
-    public boolean evaluate(List<Card> cardList) {
-        boolean jokbo;
-        //jokbo = isFlush(cardList);
-        //jokbo = isOnePair(cardList);
-        jokbo = isTriple(cardList);
-        return jokbo;
+
+
+    private List<Card> cardList;
+    private List<HandRank> rankFlags = new ArrayList<HandRank>();
+
+    public Evaluator() {
+
+    }
+    public Evaluator(List<Card> cardList){
+        this.cardList = cardList;
+    }
+
+    public HandRank evaluate(List<Card> cardList) {
+        if (isFlush(cardList)) return HandRank.FLUSH;
+        else if (isFourcard(cardList)) return HandRank.FOUR_CARD;
+        else if (isTriple(cardList)) return HandRank.TRIPLE;
+        else if (isOnePair(cardList)) return HandRank.ONE_PAIR;
+        else return null;
     }
 
     private boolean isFlush(List<Card> cardList) {
@@ -73,6 +86,27 @@ public class Evaluator {
 
         for (int key : tempMap.keySet()) {
             if (tempMap.get(key) == 3) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean isFourcard(List<Card> cardList) {
+        Map<Integer, Integer> tempMap = new HashMap<Integer, Integer>();
+
+        for (Card card : cardList) {
+            if (tempMap.containsKey(card.getRank())) {
+                Integer count = tempMap.get(card.getRank());
+                count = new Integer(count.intValue() + 1);
+                tempMap.put(card.getRank(), count);
+            } else {
+                tempMap.put(card.getRank(), new Integer(1));
+            }
+        }
+
+        for (Integer key : tempMap.keySet()) {
+            if (tempMap.get(key) == 4) {
                 return true;
             }
         }
