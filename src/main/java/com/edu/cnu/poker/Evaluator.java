@@ -27,10 +27,25 @@ public class Evaluator {
         rankCounts = new HashMap<Integer, Integer>();
     }
 
-    public HandRank evaluate(List<Card> cardList) {
+    public TotalRank evaluate(List<Card> cardList) {
 
         Map<Suit, Integer> suitCounts = this.suitCountFromCards(cardList);
         Map<Integer, Integer> rankCounts = this.rankCountFromCards(cardList);
+
+        if (this.isFlush(suitCounts)) {
+            List<Card> fiveFlushCards = this.fiveFlushCardsFromCardList(cardList);
+            Map<Integer, Integer> flushRankCounts = this.rankCountFromCards()
+            if (this.isRoyalStraightFlush(fiveFlushCards))
+                return null;
+            if (this)
+
+        } else{
+
+        }
+
+
+
+
         return null;
     }
 
@@ -42,6 +57,9 @@ public class Evaluator {
             }
         }
         return false;
+    }
+    private List<Card> fiveFlushCardsFromCardList(List<Card> cardList){
+        // get flushed card
     }
 
     public boolean isOnePair(Map<Integer, Integer> rankCounts) {
@@ -80,6 +98,7 @@ public class Evaluator {
         }
         return false;
     }
+
 
     public boolean isFourCard(Map<Integer, Integer> rankCounts) {
 
@@ -172,6 +191,24 @@ public class Evaluator {
             }
         }
         return rankCounts;
+    }
+
+
+    public boolean isFullHouse(Map<Integer, Integer> rankCounts) {
+
+        int pairCounts = 0;
+        for (int key : rankCounts.keySet()) {
+            if (rankCounts.get(key) == 3 ) {
+                pairCounts = pairCounts + 2;
+            }
+            if (rankCounts.get(key) == 2) {
+                pairCounts++;
+            }
+        }
+        if (pairCounts >= 3)
+            return true;
+        else
+            return false;
     }
 
 
