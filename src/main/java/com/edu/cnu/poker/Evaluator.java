@@ -28,18 +28,17 @@ public class Evaluator {
 
         suitCounts = suitCountFromCards(this.cardList);
         rankCounts = rankCountFromCards(this.cardList);
-        cal();
     }
 
-    public TotalRank cal(){
-        int temp = 0;
-        for (int key : this.rankCounts.keySet()) {
-            if (key > temp) temp = key;
-        }
+    public TotalRank evaluate(List<Card> cardList) {
 
-        TotalRank rank = new TotalRank(temp, suitCounts.ge);
+        Map<Suit, Integer> suitCounts = this.suitCountFromCards(cardList);
+        Map<Integer, Integer> rankCounts = this.rankCountFromCards(cardList);
+
+        HandRank handRank = this.evaluateHandRank(suitCounts, rankCounts);
+
+        return null;
     }
-
 
     public boolean isFlush(Map<Suit, Integer> suitCounts) {
 
@@ -87,6 +86,7 @@ public class Evaluator {
         }
         return false;
     }
+
 
     public boolean isFourCard(Map<Integer, Integer> rankCounts) {
 
@@ -143,6 +143,20 @@ public class Evaluator {
         return false;
     }
 
+    public boolean isBackStraightFlush(Map<Suit, Integer> suitCounts, Map<Integer, Integer> rankCounts) {
+        if ( isBackStraight(rankCounts)
+                && isFlush(suitCounts))
+            return true;
+        return false;
+    }
+
+    public boolean isRoyalStraightFlush(Map<Suit, Integer> suitCounts, Map<Integer, Integer> rankCounts){
+        if ( isMountain(rankCounts)
+                && isFlush(suitCounts))
+            return true;
+        return false;
+    }
+
     public Map<Suit, Integer> suitCountFromCards(List<Card> cardList){
         Map<Suit, Integer> suitCounts = new HashMap<Suit, Integer>();
         for (Card card : cardList) {
@@ -175,4 +189,20 @@ public class Evaluator {
     }
 
 
+    public boolean isFullHouse(Map<Integer, Integer> rankCounts) {
+
+        int pairCounts = 0;
+        for (int key : rankCounts.keySet()) {
+            if (rankCounts.get(key) == 3 ) {
+                pairCounts = pairCounts + 2;
+            }
+            if (rankCounts.get(key) == 2) {
+                pairCounts++;
+            }
+        }
+        if (pairCounts >= 3)
+            return true;
+        else
+            return false;
+    }
 }

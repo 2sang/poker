@@ -1,6 +1,7 @@
 package com.edu.cnu.poker;
 
 /**
+<<<<<<< HEAD
  * Created by 류치현 on 2017-04-25.
  */
 public class TotalRank {
@@ -14,7 +15,7 @@ public class TotalRank {
         this.suit = suit;
     }
 
-   public int calTotalRank() {
-       return handRank.getHandRank() * 255 + cardRank * 15 + suit.getSuit();
+    public int calTotalRank() {
+        return handRank.getHandRank() * 255 + cardRank * 15 + suit.getSuit();
     }
 }

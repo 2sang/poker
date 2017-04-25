@@ -150,4 +150,52 @@ public class EvaluatorTest {
         boolean result = evaluator.isStraightFlush(suitCounts, rankCounts);
         assertThat(result, is(true));
     }
+
+    @Test
+    public void 같은_숫자_3개와_같은_숫자_2개이면_풀하우스다() {
+        Evaluator evaluator = new Evaluator();
+        List<Card> cardList = Arrays.asList(
+                new Card(2, Suit.SPADES),
+                new Card(2, Suit.DIAMONDS),
+                new Card(5, Suit.HEARTS),
+                new Card(5, Suit.CLUBS),
+                new Card(5, Suit.SPADES)
+        );
+        Map<Integer, Integer> rankCounts = evaluator.rankCountFromCards(cardList);
+        boolean result = evaluator.isFullHouse(rankCounts);
+        assertThat(result, is(true));
+    }
+
+    @Test
+    public void 무늬가_같으면서_A_2_3_4_5_숫자가_연속이면_백스트레이트_플러쉬다() {
+        Evaluator evaluator = new Evaluator();
+        List<Card> cardList = Arrays.asList(
+                new Card(1, Suit.SPADES),
+                new Card(2, Suit.SPADES),
+                new Card(3, Suit.SPADES),
+                new Card(4, Suit.SPADES),
+                new Card(5, Suit.SPADES)
+        );
+        Map<Suit, Integer> suitCounts = evaluator.suitCountFromCards(cardList);
+        Map<Integer, Integer> rankCounts = evaluator.rankCountFromCards(cardList);
+        boolean result = evaluator.isBackStraightFlush(suitCounts, rankCounts);
+        assertThat(result, is(true));
+    }
+
+    @Test
+    public void 무늬가_같으면서_10_11_12_13_A_숫자가_연속이면_로얄스트레이트_플러쉬다() {
+        Evaluator evaluator = new Evaluator();
+        List<Card> cardList = Arrays.asList(
+                new Card(10, Suit.SPADES),
+                new Card(11, Suit.SPADES),
+                new Card(12, Suit.SPADES),
+                new Card(13, Suit.SPADES),
+                new Card(1, Suit.SPADES)
+        );
+        Map<Suit, Integer> suitCounts = evaluator.suitCountFromCards(cardList);
+        Map<Integer, Integer> rankCounts = evaluator.rankCountFromCards(cardList);
+        boolean result = evaluator.isRoyalStraightFlush(suitCounts, rankCounts);
+        assertThat(result, is(true));
+    }
+
 }
