@@ -151,8 +151,7 @@ public class Evaluator {
     }
 
     public boolean isRoyalStraightFlush(Map<Suit, Integer> suitCounts, Map<Integer, Integer> rankCounts) {
-        if(isMountain(rankCounts)
-                && isFlush(suitCounts))
+        if(isMountain(rankCounts) && isFlush(suitCounts))
             return true;
         return false;
     }
