@@ -20,6 +20,7 @@ public class Evaluator {
         suitCounts = new HashMap<Suit, Integer>();
         rankCounts = new HashMap<Integer, Integer>();
     }
+
     public Evaluator(List<Card> cardList){
         this.cardList = cardList;
         suitCounts = new HashMap<Suit, Integer>();
@@ -27,20 +28,13 @@ public class Evaluator {
     }
 
     public HandRank evaluate(List<Card> cardList) {
-      return null;
+
+        Map<Suit, Integer> suitCounts = this.suitCountFromCards(cardList);
+        Map<Integer, Integer> rankCounts = this.rankCountFromCards(cardList);
+        return null;
     }
 
-    public boolean isFlush(List<Card> cardList) {
-
-        for (Card card : cardList) {
-            if (suitCounts.containsKey(card.getSuit())) {
-                Integer count = suitCounts.get(card.getSuit());
-                count = new Integer(count.intValue() + 1);
-                suitCounts.put(card.getSuit(), count);
-            } else {
-                suitCounts.put(card.getSuit(), new Integer(1));
-            }
-        }
+    public boolean isFlush(Map<Suit, Integer> suitCounts) {
 
         for (Suit key : suitCounts.keySet()) {
             if (suitCounts.get(key) == 5) {
@@ -50,17 +44,7 @@ public class Evaluator {
         return false;
     }
 
-    public boolean isOnePair(List<Card> cardList) {
-
-        for (Card card : cardList) {
-            if (rankCounts.containsKey(card.getRank())) {
-                Integer concatCount = rankCounts.get(card.getRank());
-                concatCount = new Integer(concatCount.intValue() + 1);
-                rankCounts.put(card.getRank(), concatCount);
-            }  else {
-                rankCounts.put(card.getRank(), new Integer(1));
-            }
-        }
+    public boolean isOnePair(Map<Integer, Integer> rankCounts) {
 
         for (int key : rankCounts.keySet()) {
             if (rankCounts.get(key) == 2) {
@@ -71,44 +55,23 @@ public class Evaluator {
         return false;
     }
 
-    public boolean isTwoPair(List<Card> cardList){
-        Map<Integer, Integer> tempMap = new HashMap<Integer, Integer>();
-        int cnt = 0;
+    public boolean isTwoPair(Map<Integer, Integer> rankCounts){
 
-        for (Card card : cardList) {
-            if (tempMap.containsKey(card.getRank())) {
-                Integer count = tempMap.get(card.getRank());
-                count = new Integer(count.intValue() + 1);
-                tempMap.put(card.getRank(), count);
-            }  else {
-                tempMap.put(card.getRank(), new Integer(1));
+        int pairCount = 0;
+        for (int key : rankCounts.keySet()) {
+            if (rankCounts.get(key) == 2) {
+                pairCount++;
             }
         }
 
-        for (int key : tempMap.keySet()) {
-            if (tempMap.get(key) == 2) {
-                cnt++;
-            }
-        }
-
-        if(cnt == 2){
+        if(pairCount >= 2){
             return true;
         }
 
         return false;
     }
 
-    public boolean isTriple(List<Card> cardList) {
-
-        for (Card card : cardList) {
-            if (rankCounts.containsKey(card.getRank())) {
-                Integer count = rankCounts.get(card.getRank());
-                count = new Integer(count.intValue() + 1);
-                rankCounts.put(card.getRank(), count);
-            }  else {
-                rankCounts.put(card.getRank(), new Integer(1));
-            }
-        }
+    public boolean isTriple(Map<Integer, Integer> rankCounts) {
 
         for (int key : rankCounts.keySet()) {
             if (rankCounts.get(key) == 3) {
@@ -118,17 +81,7 @@ public class Evaluator {
         return false;
     }
 
-    public boolean isFourCard(List<Card> cardList) {
-
-        for (Card card : cardList) {
-            if (rankCounts.containsKey(card.getRank())) {
-                Integer count = rankCounts.get(card.getRank());
-                count = new Integer(count.intValue() + 1);
-                rankCounts.put(card.getRank(), count);
-            } else {
-                rankCounts.put(card.getRank(), new Integer(1));
-            }
-        }
+    public boolean isFourCard(Map<Integer, Integer> rankCounts) {
 
         for (Integer key : rankCounts.keySet()) {
             if (rankCounts.get(key) == 4) {
@@ -138,17 +91,7 @@ public class Evaluator {
         return false;
     }
 
-    public boolean isStraight(List<Card> cardList) {
-
-        for (Card card : cardList) {
-            if (rankCounts.containsKey(card.getRank())) {
-                Integer count = rankCounts.get(card.getRank());
-                count = new Integer(count.intValue() + 1);
-                rankCounts.put(card.getRank(), count);
-            } else {
-                rankCounts.put(card.getRank(), new Integer(1));
-            }
-        }
+    public boolean isStraight(Map<Integer, Integer> rankCounts) {
 
         int straightCount = 0;
         for (Integer key : rankCounts.keySet()) {
@@ -161,17 +104,7 @@ public class Evaluator {
         return false;
     }
 
-    public boolean isBackStraight(List<Card> cardList) {
-
-        for (Card card : cardList) {
-            if (rankCounts.containsKey(card.getRank())) {
-                Integer count = rankCounts.get(card.getRank());
-                count = new Integer(count.intValue() + 1);
-                rankCounts.put(card.getRank(), count);
-            } else {
-                rankCounts.put(card.getRank(), new Integer(1));
-            }
-        }
+    public boolean isBackStraight(Map<Integer, Integer> rankCounts) {
 
         int totalRank = 0;
         for (Integer key : rankCounts.keySet())
@@ -183,17 +116,7 @@ public class Evaluator {
             return false;
     }
 
-    public boolean isMountain(List<Card> cardList) {
-
-        for (Card card : cardList) {
-            if (rankCounts.containsKey(card.getRank())) {
-                Integer count = rankCounts.get(card.getRank());
-                count = new Integer(count.intValue() + 1);
-                rankCounts.put(card.getRank(), count);
-            } else {
-                rankCounts.put(card.getRank(), new Integer(1));
-            }
-        }
+    public boolean isMountain(Map<Integer, Integer> rankCounts) {
 
         int totalRank = 0;
         for (Integer key : rankCounts.keySet())
@@ -203,6 +126,37 @@ public class Evaluator {
             return true;
         else
             return false;
+    }
+
+    public Map<Suit, Integer> suitCountFromCards(List<Card> cardList){
+        Map<Suit, Integer> suitCounts = new HashMap<Suit, Integer>();
+        for (Card card : cardList) {
+
+            if (suitCounts.containsKey(card.getSuit())) {
+                Integer count = suitCounts.get(card.getSuit());
+                count = new Integer(count.intValue() + 1);
+                suitCounts.put(card.getSuit(), count);
+            } else {
+                suitCounts.put(card.getSuit(), new Integer(1));
+            }
+        }
+        return suitCounts;
+
+    }
+
+    public Map<Integer, Integer> rankCountFromCards(List<Card> cardList){
+
+        Map<Integer, Integer> rankCounts = new HashMap<Integer, Integer>();
+        for (Card card : cardList) {
+            if (rankCounts.containsKey(card.getRank())) {
+                Integer count = rankCounts.get(card.getRank());
+                count = new Integer(count.intValue() + 1);
+                rankCounts.put(card.getRank(), count);
+            } else {
+                rankCounts.put(card.getRank(), new Integer(1));
+            }
+        }
+        return rankCounts;
     }
 
     public boolean isStraightFlush(List<Card> cardList) {

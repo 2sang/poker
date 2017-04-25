@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import static org.hamcrest.CoreMatchers.both;
 import static org.hamcrest.CoreMatchers.is;
@@ -24,7 +25,8 @@ public class EvaluatorTest {
                 new Card(13,Suit.CLUBS),
                 new Card(2,Suit.CLUBS)
         );
-        boolean result = evaluator.isFlush(cardList);
+        Map<Suit, Integer> suitCounts = evaluator.suitCountFromCards(cardList);
+        boolean result = evaluator.isFlush(suitCounts);
         assertThat(result, is(true));
     }
 
@@ -38,7 +40,8 @@ public class EvaluatorTest {
                 new Card(4, Suit.CLUBS),
                 new Card(5, Suit.SPADES)
         );
-        boolean result = evaluator.isOnePair(cardList);
+        Map<Integer, Integer> rankCounts = evaluator.rankCountFromCards(cardList);
+        boolean result = evaluator.isOnePair(rankCounts);
         assertThat(result, is(true));
     }
 
@@ -52,7 +55,8 @@ public class EvaluatorTest {
                 new Card(3, Suit.CLUBS),
                 new Card(5, Suit.SPADES)
         );
-        boolean result = evaluator.isTwoPair(cardList);
+        Map<Integer, Integer> rankCounts = evaluator.rankCountFromCards(cardList);
+        boolean result = evaluator.isTwoPair(rankCounts);
         assertThat(result, is(true));
     }
 
@@ -66,7 +70,8 @@ public class EvaluatorTest {
                 new Card(5, Suit.SPADES),
                 new Card(11, Suit.SPADES)
         );
-        boolean result = evaluator.isTriple(cardList);
+        Map<Integer, Integer> rankCounts = evaluator.rankCountFromCards(cardList);
+        boolean result = evaluator.isTriple(rankCounts);
         assertThat(result, is(true));
     }
 
@@ -80,7 +85,8 @@ public class EvaluatorTest {
                 new Card(4, Suit.CLUBS),
                 new Card(5, Suit.SPADES)
         );
-        boolean result = evaluator.isFourCard(cardList);
+        Map<Integer, Integer> rankCounts = evaluator.rankCountFromCards(cardList);
+        boolean result = evaluator.isFourCard(rankCounts);
         assertThat(result, is(true));
     }
 
@@ -94,7 +100,8 @@ public class EvaluatorTest {
                 new Card(10, Suit.CLUBS),
                 new Card(9, Suit.SPADES)
         );
-        boolean result = evaluator.isStraight(cardList);
+        Map<Integer, Integer> rankCounts = evaluator.rankCountFromCards(cardList);
+        boolean result = evaluator.isStraight(rankCounts);
         assertThat(result, is(true));
     }
 
@@ -108,7 +115,8 @@ public class EvaluatorTest {
                 new Card(4, Suit.CLUBS),
                 new Card(5, Suit.SPADES)
         );
-        boolean result = evaluator.isBackStraight(cardList);
+        Map<Integer, Integer> rankCounts = evaluator.rankCountFromCards(cardList);
+        boolean result = evaluator.isBackStraight(rankCounts);
         assertThat(result, is(true));
     }
 
@@ -122,7 +130,8 @@ public class EvaluatorTest {
                 new Card(13, Suit.CLUBS),
                 new Card(1, Suit.SPADES)
         );
-        boolean result = evaluator.isMountain(cardList);
+        Map<Integer, Integer> rankCounts = evaluator.rankCountFromCards(cardList);
+        boolean result = evaluator.isMountain(rankCounts);
         assertThat(result, is(true));
     }
 
