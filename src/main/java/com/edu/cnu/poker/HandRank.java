@@ -23,4 +23,9 @@ public enum HandRank {
     private HandRank(int rankOfCards){
         this.rankOfCard = rankOfCards;
     }
+
+    public int getHandRank() {
+        return rankOfCard;
+    }
+
 }

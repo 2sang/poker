@@ -25,8 +25,10 @@ public class Evaluator {
         this.cardList = cardList;
         suitCounts = new HashMap<Suit, Integer>();
         rankCounts = new HashMap<Integer, Integer>();
-    }
 
+        suitCounts = suitCountFromCards(this.cardList);
+        rankCounts = rankCountFromCards(this.cardList);
+    }
 
     public HandRank evaluate(List<Card> cardList) {
 
