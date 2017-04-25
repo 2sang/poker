@@ -27,10 +27,25 @@ public class Evaluator {
         rankCounts = new HashMap<Integer, Integer>();
     }
 
-    public HandRank evaluate(List<Card> cardList) {
+    public TotalRank evaluate(List<Card> cardList) {
 
         Map<Suit, Integer> suitCounts = this.suitCountFromCards(cardList);
         Map<Integer, Integer> rankCounts = this.rankCountFromCards(cardList);
+
+        if (this.isFlush(suitCounts)) {
+            List<Card> fiveFlushCards = this.fiveFlushCardsFromCardList(cardList);
+            Map<Integer, Integer> flushRankCounts = this.rankCountFromCards()
+            if (this.isRoyalStraightFlush(fiveFlushCards))
+                return null;
+            if (this)
+
+        } else{
+
+        }
+
+
+
+
         return null;
     }
 
@@ -42,6 +57,9 @@ public class Evaluator {
             }
         }
         return false;
+    }
+    private List<Card> fiveFlushCardsFromCardList(List<Card> cardList){
+        // get flushed card
     }
 
     public boolean isOnePair(Map<Integer, Integer> rankCounts) {
