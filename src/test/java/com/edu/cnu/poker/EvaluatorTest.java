@@ -26,8 +26,8 @@ public class EvaluatorTest {
                 new Card(2,Suit.CLUBS)
         );
         Map<Suit, Integer> suitCounts = evaluator.suitCountFromCards(cardList);
-        boolean result = evaluator.isFlush(suitCounts);
-        assertThat(result, is(true));
+        HandRank result = evaluator.evaluate(cardList);
+        assertThat(result, is(HandRank.FLUSH));
     }
 
     @Test
@@ -41,8 +41,8 @@ public class EvaluatorTest {
                 new Card(5, Suit.SPADES)
         );
         Map<Integer, Integer> rankCounts = evaluator.rankCountFromCards(cardList);
-        boolean result = evaluator.isOnePair(rankCounts);
-        assertThat(result, is(true));
+        HandRank result = evaluator.evaluate(cardList);
+        assertThat(result, is(HandRank.ONE_PAIR));
     }
 
     @Test
@@ -56,8 +56,8 @@ public class EvaluatorTest {
                 new Card(5, Suit.SPADES)
         );
         Map<Integer, Integer> rankCounts = evaluator.rankCountFromCards(cardList);
-        boolean result = evaluator.isTwoPair(rankCounts);
-        assertThat(result, is(true));
+        HandRank result = evaluator.evaluate(cardList);
+        assertThat(result, is(HandRank.TWO_PAIR));
     }
 
     @Test
@@ -71,8 +71,8 @@ public class EvaluatorTest {
                 new Card(11, Suit.SPADES)
         );
         Map<Integer, Integer> rankCounts = evaluator.rankCountFromCards(cardList);
-        boolean result = evaluator.isTriple(rankCounts);
-        assertThat(result, is(true));
+        HandRank result = evaluator.evaluate(cardList);
+        assertThat(result, is(HandRank.TRIPLE));
     }
 
     @Test
@@ -86,8 +86,8 @@ public class EvaluatorTest {
                 new Card(5, Suit.SPADES)
         );
         Map<Integer, Integer> rankCounts = evaluator.rankCountFromCards(cardList);
-        boolean result = evaluator.isFourCard(rankCounts);
-        assertThat(result, is(true));
+        HandRank result = evaluator.evaluate(cardList);
+        assertThat(result, is(HandRank.FOUR_CARD));
     }
 
     @Test
@@ -101,8 +101,8 @@ public class EvaluatorTest {
                 new Card(9, Suit.SPADES)
         );
         Map<Integer, Integer> rankCounts = evaluator.rankCountFromCards(cardList);
-        boolean result = evaluator.isStraight(rankCounts);
-        assertThat(result, is(true));
+        HandRank result = evaluator.evaluate(cardList);
+        assertThat(result, is(HandRank.STRAIGHT));
     }
 
     @Test
@@ -116,8 +116,8 @@ public class EvaluatorTest {
                 new Card(5, Suit.SPADES)
         );
         Map<Integer, Integer> rankCounts = evaluator.rankCountFromCards(cardList);
-        boolean result = evaluator.isBackStraight(rankCounts);
-        assertThat(result, is(true));
+        HandRank result = evaluator.evaluate(cardList);
+        assertThat(result, is(HandRank.BACK_STRAIGHT));
     }
 
     @Test
@@ -131,8 +131,8 @@ public class EvaluatorTest {
                 new Card(1, Suit.SPADES)
         );
         Map<Integer, Integer> rankCounts = evaluator.rankCountFromCards(cardList);
-        boolean result = evaluator.isMountain(rankCounts);
-        assertThat(result, is(true));
+        HandRank result = evaluator.evaluate(cardList);
+        assertThat(result, is(HandRank.MOUNTAIN));
     }
 
     @Test
@@ -147,8 +147,8 @@ public class EvaluatorTest {
         );
         Map<Suit, Integer> suitCounts = evaluator.suitCountFromCards(cardList);
         Map<Integer, Integer> rankCounts = evaluator.rankCountFromCards(cardList);
-        boolean result = evaluator.isStraightFlush(suitCounts, rankCounts);
-        assertThat(result, is(true));
+        HandRank result = evaluator.evaluate(cardList);
+        assertThat(result, is(HandRank.STRAIGHT_FLUSH));
     }
 
     @Test
@@ -162,8 +162,8 @@ public class EvaluatorTest {
                 new Card(5, Suit.SPADES)
         );
         Map<Integer, Integer> rankCounts = evaluator.rankCountFromCards(cardList);
-        boolean result = evaluator.isFullHouse(rankCounts);
-        assertThat(result, is(true));
+        HandRank result = evaluator.evaluate(cardList);
+        assertThat(result, is(HandRank.FULL_HOUSE));
     }
 
     @Test
@@ -178,8 +178,8 @@ public class EvaluatorTest {
         );
         Map<Suit, Integer> suitCounts = evaluator.suitCountFromCards(cardList);
         Map<Integer, Integer> rankCounts = evaluator.rankCountFromCards(cardList);
-        boolean result = evaluator.isBackStraightFlush(suitCounts, rankCounts);
-        assertThat(result, is(true));
+        HandRank result = evaluator.evaluate(cardList);
+        assertThat(result, is(HandRank.BACK_STRAIGHT_FLUSH));
     }
 
     @Test
@@ -194,8 +194,8 @@ public class EvaluatorTest {
         );
         Map<Suit, Integer> suitCounts = evaluator.suitCountFromCards(cardList);
         Map<Integer, Integer> rankCounts = evaluator.rankCountFromCards(cardList);
-        boolean result = evaluator.isRoyalStraightFlush(suitCounts, rankCounts);
-        assertThat(result, is(true));
+        HandRank result = evaluator.evaluate(cardList);
+        assertThat(result, is(HandRank.ROYAL_STRAIGHT_FLUSH));
     }
 
 }
